@@ -1,0 +1,12 @@
+name: SQL Sales Analytics
+
+on:
+  workflow_dispatch:
+
+jobs:
+  placeholder:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Project initialized
+        run: echo "Project structure created successfully!"
