@@ -9,18 +9,14 @@ from config import (
     CHART_DIR,
     REPORT_DIR,
 )
+from database import load_sales_data
 
 print("🚀 Starting SQL Sales Analytics Dashboard...")
 
 # =========================
 # 🔌 اتصال به SQL Server
 # =========================
-conn = pyodbc.connect(
-    rf"DRIVER={{ODBC Driver 17 for SQL Server}};"
-    rf"SERVER={SERVER};"
-    rf"DATABASE={DATABASE};"
-    r"Trusted_Connection=yes"
-)
+df = load_sales_data()
 
 print("✅ Connected to SQL Server")
 #-----
@@ -30,34 +26,6 @@ os.makedirs(REPORT_DIR, exist_ok=True)
 
 print("📁 Output folders are ready.")
 
-# =========================
-# 📥 گرفتن دیتا (JOIN حرفه‌ای)
-# =========================
-query = """
-SELECT
-    o.orderid,
-    o.orderdate,
-    o.shipcountry,
-    c.companyname,
-    c.country,
-    d.productid,
-    p.productname,
-    d.qty,
-    d.unitprice,
-    (d.qty * d.unitprice) AS total_sales
-FROM Sales.Orders o
-
-JOIN Sales.Customers c
-    ON o.custid = c.custid
-
-JOIN Sales.OrderDetails d
-    ON o.orderid = d.orderid
-
-JOIN Production.Products p
-    ON d.productid = p.productid
-"""
-
-df = pd.read_sql(query, conn)
 
 # =========================
 # Convert order date
