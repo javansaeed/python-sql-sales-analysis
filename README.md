@@ -25,4 +25,14 @@ It connects to a SQL database, extracts data, and performs basic data analysis a
 ---
 
 ## 🚀 How to Run
-1. Install dependencies:
+1. Install dependencies: pip install -r requirements.txt
+2.  Run the project:
+   python src/main.py
+
+---
+
+## 📂 Project Structure 
+src/ Python source code
+data/ Input data (optional)
+output/ Charts and results
+requirements.txt Project dependencies
