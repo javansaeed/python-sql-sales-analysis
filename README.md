@@ -1,38 +1,40 @@
-# SQL Sales Analytics
+# SQL Sales Analytics Dashboard
 
-## 📊 Project Overview
-This project analyzes sales data using SQL Server (TSQLV4) and Python.
+A modular data analytics project built with Python and SQL Server.
 
-It connects to a SQL database, extracts data, and performs basic data analysis and visualization.
+## 📌 Overview
+This project connects to a SQL Server database, extracts sales data, performs analytics, and generates insights through KPIs, charts, and reports.
 
----
+## ⚙️ Features
+- SQL Server connection using pyodbc
+- Modular architecture (database, analysis, charts, exporter)
+- KPI calculations (Revenue, Top Products, Sales by Country, Customers)
+- Automated CSV export
+- Data visualization (matplotlib)
+- HTML + text reporting
+- GitHub Actions automation pipeline
 
-## ⚙️ Technologies Used
+## 🧰 Tech Stack
 - Python
-- pandas
-- pyodbc
-- matplotlib
-- SQL Server (TSQLV4)
+- Pandas
+- Matplotlib
+- SQL Server (T-SQL)
+- GitHub Actions
 
----
+## 📊 Outputs
+- CSV files (sales data analysis)
+- PNG charts (visual reports)
+- HTML report
+- Text report
 
-## 📌 Features
-- Connect to SQL Server database
-- Load sales data using SQL queries
-- Perform basic data analysis
-- Generate simple visualizations
-
----
+## 🧠 Architecture
+- database.py → Data extraction
+- analysis.py → KPI calculations
+- charts.py → Visualization
+- exporter.py → Reporting
+- main.py → Pipeline controller
 
 ## 🚀 How to Run
-1. Install dependencies: pip install -r requirements.txt
-2.  Run the project:
-   python src/main.py
-
----
-
-## 📂 Project Structure 
-src/ Python source code
-data/ Input data (optional)
-output/ Charts and results
-requirements.txt Project dependencies
+```bash
+pip install -r requirements.txt
+python src/main.py
