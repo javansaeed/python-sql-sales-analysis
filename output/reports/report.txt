@@ -1,0 +1,80 @@
+SQL SALES ANALYTICS REPORT
+========================================
+
+Total Revenue: 1354458.59
+
+Top Products:
+     productname  total_sales
+0  Product QDOMO     149984.2
+1  Product VJXYN      87736.4
+2  Product UKXRI      76296.0
+3  Product WHBYK      50286.0
+4  Product WUXYK      49827.9
+5  Product VKCMF      45121.2
+6  Product APITJ      44742.6
+7  Product BLCAX      35482.2
+8  Product CKEDC      31987.5
+9  Product OFBNT      26865.6
+
+Sales by Country:
+    shipcountry  total_sales
+0           USA    263566.98
+1       Germany    244640.63
+2       Austria    139496.63
+3        Brazil    114968.48
+4        France     85498.76
+5     Venezuela     60814.89
+6            UK     60616.51
+7        Sweden     59523.70
+8       Ireland     57317.39
+9        Canada     55334.10
+10      Belgium     35134.98
+11      Denmark     34782.25
+12  Switzerland     32919.50
+13       Mexico     24073.45
+14      Finland     19778.45
+15        Spain     19431.89
+16        Italy     16705.15
+17     Portugal     12468.65
+18    Argentina      8119.10
+19       Norway      5735.15
+20       Poland      3531.95
+
+Top Customers:
+      companyname  total_sales
+0  Customer IRRVL    117483.39
+1  Customer LCOUJ    115673.39
+2  Customer THHDP    113236.68
+3  Customer FRXZL     57317.39
+4  Customer NYUHS     52245.90
+5  Customer IBVRG     34101.15
+6  Customer CYZTN     32555.55
+7  Customer PVDZC     32203.90
+8  Customer GLLAG     31745.75
+9  Customer WFIZJ     30226.10
+
+Monthly Sales:
+   year_month  total_sales
+0     2014-07     30192.10
+1     2014-08     26609.40
+2     2014-09     27636.00
+3     2014-10     41203.60
+4     2014-11     49704.00
+5     2014-12     50953.40
+6     2015-01     66692.80
+7     2015-02     41207.20
+8     2015-03     39979.90
+9     2015-04     55699.39
+10    2015-05     56823.70
+11    2015-06     39088.00
+12    2015-07     55464.93
+13    2015-08     49981.69
+14    2015-09     59733.02
+15    2015-10     70328.50
+16    2015-11     45913.36
+17    2015-12     77476.26
+18    2016-01    100854.72
+19    2016-02    104561.95
+20    2016-03    109825.45
+21    2016-04    134630.56
+22    2016-05     19898.66
