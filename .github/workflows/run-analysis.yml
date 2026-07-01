@@ -76,3 +76,19 @@ jobs:
           -P "YourStrong!Passw0rd" \
           -C \
           -Q "RESTORE FILELISTONLY FROM DISK='/var/opt/mssql/data/TSQLV4.bak'"
+    - name: Restore TSQLV4 Database
+      run: |
+        /opt/mssql-tools18/bin/sqlcmd \
+          -S localhost \
+          -U sa \
+          -P "YourStrong!Passw0rd" \
+          -C \
+          -Q "
+          RESTORE DATABASE TSQLV4
+          FROM DISK='/var/opt/mssql/data/TSQLV4.bak'
+          WITH
+            MOVE 'TSQLV4' TO '/var/opt/mssql/data/TSQLV4.mdf',
+            MOVE 'TSQLV4_log' TO '/var/opt/mssql/data/TSQLV4_log.ldf',
+            REPLACE,
+            RECOVERY;
+          "
