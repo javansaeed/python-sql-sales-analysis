@@ -2,6 +2,13 @@ import pandas as pd
 import pyodbc
 import matplotlib.pyplot as plt
 import os
+from config import (
+    SERVER,
+    DATABASE,
+    CSV_DIR,
+    CHART_DIR,
+    REPORT_DIR,
+)
 
 print("🚀 Starting SQL Sales Analytics Dashboard...")
 
@@ -9,24 +16,14 @@ print("🚀 Starting SQL Sales Analytics Dashboard...")
 # 🔌 اتصال به SQL Server
 # =========================
 conn = pyodbc.connect(
-    r"DRIVER={ODBC Driver 17 for SQL Server};"
-    r"SERVER=localhost\MSSQLSERVER25;"
-    r"DATABASE=TSQLV4;"
+    rf"DRIVER={{ODBC Driver 17 for SQL Server}};"
+    rf"SERVER={SERVER};"
+    rf"DATABASE={DATABASE};"
     r"Trusted_Connection=yes"
 )
 
 print("✅ Connected to SQL Server")
-
-# =========================
-# Create output folders
-# =========================
-
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-
-CSV_DIR = os.path.join(BASE_DIR, "output", "csv")
-CHART_DIR = os.path.join(BASE_DIR, "output", "charts")
-REPORT_DIR = os.path.join(BASE_DIR, "output", "reports")
-
+#-----
 os.makedirs(CSV_DIR, exist_ok=True)
 os.makedirs(CHART_DIR, exist_ok=True)
 os.makedirs(REPORT_DIR, exist_ok=True)
