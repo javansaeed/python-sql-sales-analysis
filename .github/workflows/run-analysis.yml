@@ -46,7 +46,20 @@ jobs:
         ls -la data
     - name: Show Docker containers
       run: docker ps -a
-      
+
+    - name: Copy backup into SQL Server container
+      run: |
+        CONTAINER=$(docker ps -q --filter "ancestor=mcr.microsoft.com/mssql/server:2019-latest")
+        echo "Container: $CONTAINER"
+
+        docker cp data/TSQLV4.bak $CONTAINER:/var/opt/mssql/data/TSQLV4.bak
+    
+    - name: Verify backup inside container
+      run: |
+        CONTAINER=$(docker ps -q --filter "ancestor=mcr.microsoft.com/mssql/server:2019-latest")
+
+        docker exec $CONTAINER ls -lh /var/opt/mssql/data
+    
     - name: Test SQL Connection
       run: |
         /opt/mssql-tools18/bin/sqlcmd \
