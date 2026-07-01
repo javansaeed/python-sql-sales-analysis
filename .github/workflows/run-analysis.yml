@@ -109,3 +109,8 @@ jobs:
         DB_PASSWORD: YourStrong!Passw0rd
       run: |
         python src/main.py
+    - name: Upload Reports
+      uses: actions/upload-artifact@v4
+      with:
+        name: sql-sales-output
+        path: output/
