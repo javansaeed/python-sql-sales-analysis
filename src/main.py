@@ -1,10 +1,8 @@
 import pandas as pd
-import pyodbc
 import matplotlib.pyplot as plt
 import os
 from config import (
-    SERVER,
-    DATABASE,
+
     CSV_DIR,
     CHART_DIR,
     REPORT_DIR,
@@ -18,25 +16,11 @@ print("🚀 Starting SQL Sales Analytics Dashboard...")
 # =========================
 df = load_sales_data()
 
-print("✅ Connected to SQL Server")
-#-----
 os.makedirs(CSV_DIR, exist_ok=True)
 os.makedirs(CHART_DIR, exist_ok=True)
 os.makedirs(REPORT_DIR, exist_ok=True)
 
 print("📁 Output folders are ready.")
-
-
-# =========================
-# Convert order date
-# =========================
-
-df["orderdate"] = pd.to_datetime(df["orderdate"])
-# =========================
-# Create Year-Month column
-# =========================
-
-df["year_month"] = df["orderdate"].dt.to_period("M").astype(str)
 
 print("📊 Data loaded successfully!")
 print(df.head())
