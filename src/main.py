@@ -1,7 +1,3 @@
-import sys
-
-if hasattr(sys.stdout, "reconfigure"):
-    sys.stdout.reconfigure(encoding="utf-8")
 
 import os
 from config import (
@@ -15,7 +11,7 @@ from analysis import calculate_kpis
 from charts import save_bar_chart, save_line_chart
 from exporter import export_text_report, export_html_report
 
-print("🚀 Starting SQL Sales Analytics Dashboard...")
+print("Starting SQL Sales Analytics Dashboard...")
 
 # =========================
 # 🔌 اتصال به SQL Server
@@ -27,9 +23,9 @@ os.makedirs(CSV_DIR, exist_ok=True)
 os.makedirs(CHART_DIR, exist_ok=True)
 os.makedirs(REPORT_DIR, exist_ok=True)
 
-print("📁 Output folders are ready.")
+print("Output folders are ready.")
 
-print("📊 Data loaded successfully!")
+print("Data loaded successfully!")
 print(df.head())
 
 # =========================
@@ -41,22 +37,22 @@ results["top_products"].to_csv(
     index=False
 )
 
-print("💾 top_products.csv saved.")
+print("top_products.csv saved.")
 # =========================
 
-print("\n💰 Total Revenue:")
+print("\n Total Revenue:")
 print(results["total_revenue"])
 
-print("\n📦 Top Products:")
+print("\n Top Products:")
 print(results["top_products"])
 
-print("\n🌍 Sales by Country:")
+print("\n Sales by Country:")
 print(results["sales_by_country"])
 
-print("\n👤 Top Customers:")
+print("\n Top Customers:")
 print(results["top_customers"])
 
-print("\n📈 Monthly Sales:")
+print("\n Monthly Sales:")
 print(results["monthly_sales"])
 
 # =========================
