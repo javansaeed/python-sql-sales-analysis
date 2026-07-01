@@ -100,3 +100,4 @@ jobs:
         DB_PASSWORD: YourStrong!Passw0rd
       run: |
         python src/main.py
+
