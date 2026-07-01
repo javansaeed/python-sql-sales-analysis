@@ -4,8 +4,11 @@ import os
 # SQL Server Configuration
 # =========================
 
-SERVER = r"localhost\MSSQLSERVER25"
-DATABASE = "TSQLV4"
+SERVER = os.getenv("DB_SERVER", r"localhost\MSSQLSERVER25")
+DATABASE = os.getenv("DB_DATABASE", "TSQLV4")
+
+USERNAME = os.getenv("DB_USERNAME", "")
+PASSWORD = os.getenv("DB_PASSWORD", "")
 
 # =========================
 # Project Paths
