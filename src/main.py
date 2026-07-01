@@ -8,6 +8,7 @@ from config import (
     REPORT_DIR,
 )
 from database import load_sales_data
+from analysis import calculate_kpis
 
 print("🚀 Starting SQL Sales Analytics Dashboard...")
 
@@ -15,6 +16,7 @@ print("🚀 Starting SQL Sales Analytics Dashboard...")
 # 🔌 اتصال به SQL Server
 # =========================
 df = load_sales_data()
+results = calculate_kpis(df)
 
 os.makedirs(CSV_DIR, exist_ok=True)
 os.makedirs(CHART_DIR, exist_ok=True)
@@ -26,85 +28,37 @@ print("📊 Data loaded successfully!")
 print(df.head())
 
 # =========================
-# 💰 KPI 1: Total Revenue
-# =========================
-total_revenue = df['total_sales'].sum()
-print("\n💰 Total Revenue:", total_revenue)
-
-# =========================
-# 📦 KPI 2: Top Products
-# =========================
-top_products = (
-    df.groupby('productname')['total_sales']
-    .sum()
-    .sort_values(ascending=False)
-    .head(10)
-)
-
-print("\n📦 Top Products:")
-print(top_products)
-
-# =========================
 # Save Top Products
 # =========================
 
-top_products.to_csv(
+results["top_products"].to_csv(
     os.path.join(CSV_DIR, "top_products.csv"),
     header=["total_sales"]
 )
 
 print("💾 top_products.csv saved.")
+# =========================
 
-# =========================
-# 🌍 KPI 3: Sales by Country
-# =========================
-sales_by_country = (
-    df.groupby('shipcountry')['total_sales']
-    .sum()
-    .sort_values(ascending=False)
-)
+print("\n💰 Total Revenue:")
+print(results["total_revenue"])
+
+print("\n📦 Top Products:")
+print(results["top_products"])
 
 print("\n🌍 Sales by Country:")
-print(sales_by_country)
-
-# =========================
-# Top Customers
-# =========================
-
-top_customers = (
-    df.groupby("companyname")["total_sales"]
-      .sum()
-      .sort_values(ascending=False)
-      .head(10)
-)
+print(results["sales_by_country"])
 
 print("\n👤 Top Customers:")
-print(top_customers)
+print(results["top_customers"])
 
-# =========================
-# Monthly Sales Trend
-# =========================
+print("\n📈 Monthly Sales:")
+print(results["monthly_sales"])
 
-monthly_sales = (
-    df.groupby("year_month")["total_sales"]
-      .sum()
-      .reset_index()
-)
-
-print("\n📈 Monthly Sales Trend:")
-print(monthly_sales)
-
-monthly_sales.to_csv(
-    os.path.join(CSV_DIR, "monthly_sales.csv"),
-    index=False
-)
-
-print("💾 monthly_sales.csv saved.")
 # =========================
 # Save Sales by Country
 # =========================
 
-sales_by_country.to_csv(
+results["sales_by_country"].to_csv(
     os.path.join(CSV_DIR, "sales_by_country.csv"),
     header=["total_sales"]
 )
@@ -114,7 +68,7 @@ print("💾 sales_by_country.csv saved.")
 # 📊 نمودار 1: Top Products
 # =========================
 plt.figure(figsize=(10,5))
-top_products.plot(kind='bar')
+results["top_products"].plot(kind='bar')
 plt.title("Top Selling Products")
 plt.xlabel("Product")
 plt.ylabel("Revenue")
@@ -133,7 +87,7 @@ plt.show()
 # 📊 نمودار 2: Sales by Country
 # =========================
 plt.figure(figsize=(10,5))
-sales_by_country.plot(kind='bar')
+results["sales_by_country"].plot(kind='bar')
 plt.title("Sales by Country")
 plt.xlabel("Country")
 plt.ylabel("Revenue")
@@ -153,8 +107,8 @@ print("\n🎯 Dashboard completed successfully!")
 plt.figure(figsize=(12,5))
 
 plt.plot(
-    monthly_sales["year_month"],
-    monthly_sales["total_sales"],
+    results["monthly_sales"]["year_month"],
+    results["monthly_sales"]["total_sales"],
     marker="o"
 )
 
@@ -182,7 +136,7 @@ print("🖼️ monthly_sales_trend.png saved.")
 
 plt.figure(figsize=(10,5))
 
-top_customers.plot(kind="bar")
+results["top_customers"].plot(kind="bar")
 
 plt.title("Top Customers")
 plt.xlabel("Customer")
