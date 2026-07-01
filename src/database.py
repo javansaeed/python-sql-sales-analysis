@@ -16,7 +16,7 @@ def get_connection():
 
     if USERNAME:
         conn = pyodbc.connect(
-            f"DRIVER={{ODBC Driver 17 for SQL Server}};"
+            f"DRIVER={{ODBC Driver 18 for SQL Server}};"
             f"SERVER={SERVER};"
             f"DATABASE={DATABASE};"
             f"UID={USERNAME};"
