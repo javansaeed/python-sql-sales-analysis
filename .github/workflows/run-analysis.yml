@@ -92,3 +92,11 @@ jobs:
             REPLACE,
             RECOVERY;
           "
+    - name: Run Python Project
+      env:
+        DB_SERVER: localhost
+        DB_DATABASE: TSQLV4
+        DB_USERNAME: sa
+        DB_PASSWORD: YourStrong!Passw0rd
+      run: |
+        python src/main.py
