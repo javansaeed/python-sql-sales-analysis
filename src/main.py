@@ -8,6 +8,7 @@ from config import (
 from database import load_sales_data
 from analysis import calculate_kpis
 from charts import save_bar_chart, save_line_chart
+from exporter import export_text_report, export_html_report
 
 print("🚀 Starting SQL Sales Analytics Dashboard...")
 
@@ -32,7 +33,7 @@ print(df.head())
 
 results["top_products"].to_csv(
     os.path.join(CSV_DIR, "top_products.csv"),
-    header=["total_sales"]
+    index=False
 )
 
 print("💾 top_products.csv saved.")
@@ -59,7 +60,7 @@ print(results["monthly_sales"])
 
 results["sales_by_country"].to_csv(
     os.path.join(CSV_DIR, "sales_by_country.csv"),
-    header=["total_sales"]
+    index=False
 )
 
 print("💾 sales_by_country.csv saved.")
@@ -107,4 +108,18 @@ save_line_chart(
     "Month",
     "Revenue",
     os.path.join(CHART_DIR, "monthly_sales_trend.png")
+)
+
+# =========================
+# 📄 Export Reports
+# =========================
+
+export_text_report(
+    results,
+    os.path.join(REPORT_DIR, "report.txt")
+)
+
+export_html_report(
+    results,
+    os.path.join(REPORT_DIR, "report.html")
 )
