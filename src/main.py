@@ -1,5 +1,3 @@
-import pandas as pd
-import matplotlib.pyplot as plt
 import os
 from config import (
 
@@ -9,6 +7,7 @@ from config import (
 )
 from database import load_sales_data
 from analysis import calculate_kpis
+from charts import save_bar_chart, save_line_chart
 
 print("🚀 Starting SQL Sales Analytics Dashboard...")
 
@@ -67,91 +66,45 @@ print("💾 sales_by_country.csv saved.")
 # =========================
 # 📊 نمودار 1: Top Products
 # =========================
-plt.figure(figsize=(10,5))
-results["top_products"].plot(kind='bar')
-plt.title("Top Selling Products")
-plt.xlabel("Product")
-plt.ylabel("Revenue")
-plt.xticks(rotation=45)
-plt.tight_layout()
-plt.savefig(
-    os.path.join(CHART_DIR, "top_products.png"),
-    dpi=300,
-    bbox_inches="tight"
+save_bar_chart(
+    results["top_products"],
+    "Top Selling Products",
+    "Product",
+    "Revenue",
+    os.path.join(CHART_DIR, "top_products.png")
 )
-
-print("🖼️ top_products.png saved.")
-plt.show()
 
 # =========================
 # 📊 نمودار 2: Sales by Country
 # =========================
-plt.figure(figsize=(10,5))
-results["sales_by_country"].plot(kind='bar')
-plt.title("Sales by Country")
-plt.xlabel("Country")
-plt.ylabel("Revenue")
-plt.xticks(rotation=45)
-plt.tight_layout()
-plt.savefig(
-    os.path.join(CHART_DIR, "sales_by_country.png"),
-    dpi=300,
-    bbox_inches="tight"
+save_bar_chart(
+    results["sales_by_country"],
+    "Sales by Country",
+    "Country",
+    "Revenue",
+    os.path.join(CHART_DIR, "sales_by_country.png")
 )
-
-print("🖼️ sales_by_country.png saved.")
-plt.show()
-
-print("\n🎯 Dashboard completed successfully!")
-
-plt.figure(figsize=(12,5))
-
-plt.plot(
-    results["monthly_sales"]["year_month"],
-    results["monthly_sales"]["total_sales"],
-    marker="o"
-)
-
-plt.title("Monthly Sales Trend")
-plt.xlabel("Month")
-plt.ylabel("Revenue")
-
-plt.xticks(rotation=45)
-
-plt.tight_layout()
-
-plt.savefig(
-    os.path.join(CHART_DIR, "monthly_sales_trend.png"),
-    dpi=300,
-    bbox_inches="tight"
-)
-
-plt.show()
-
-print("🖼️ monthly_sales_trend.png saved.")
 
 # =========================
 # 📊 نمودار 3:Top Customers
 # =========================
-
-plt.figure(figsize=(10,5))
-
-results["top_customers"].plot(kind="bar")
-
-plt.title("Top Customers")
-plt.xlabel("Customer")
-plt.ylabel("Revenue")
-
-plt.xticks(rotation=45)
-
-plt.tight_layout()
-
-plt.savefig(
-    os.path.join(CHART_DIR, "top_customers.png"),
-    dpi=300,
-    bbox_inches="tight"
+save_bar_chart(
+    results["top_customers"],
+    "Top Customers",
+    "Customer",
+    "Revenue",
+    os.path.join(CHART_DIR, "top_customers.png")
 )
 
-plt.show()
+# =========================
+# 📊 نمودار 4:Monthly Sales
+# =========================
 
-print("🖼️ top_customers.png saved.")
+save_line_chart(
+    results["monthly_sales"]["year_month"],
+    results["monthly_sales"]["total_sales"],
+    "Monthly Sales Trend",
+    "Month",
+    "Revenue",
+    os.path.join(CHART_DIR, "monthly_sales_trend.png")
+)
