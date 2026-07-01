@@ -10,12 +10,14 @@ def calculate_kpis(df):
           .sum()
           .sort_values(ascending=False)
           .head(10)
+          .reset_index()
     )
 
     sales_by_country = (
         df.groupby("shipcountry")["total_sales"]
           .sum()
           .sort_values(ascending=False)
+          .reset_index()
     )
 
     top_customers = (
@@ -23,12 +25,14 @@ def calculate_kpis(df):
           .sum()
           .sort_values(ascending=False)
           .head(10)
+          .reset_index()
     )
 
     monthly_sales = (
         df.groupby("year_month")["total_sales"]
           .sum()
           .reset_index()
+          
     )
 
     return {
