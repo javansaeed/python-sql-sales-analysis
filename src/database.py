@@ -1,7 +1,12 @@
 import pyodbc
 import pandas as pd
 
-from config import SERVER, DATABASE
+from config import (
+    SERVER,
+    DATABASE,
+    USERNAME,
+    PASSWORD,
+)
 
 
 def get_connection():
@@ -9,14 +14,25 @@ def get_connection():
     Connect to SQL Server
     """
 
-    conn = pyodbc.connect(
-        rf"DRIVER={{ODBC Driver 17 for SQL Server}};"
-        rf"SERVER={SERVER};"
-        rf"DATABASE={DATABASE};"
-        r"Trusted_Connection=yes"
-    )
+    if USERNAME:
+        conn = pyodbc.connect(
+            f"DRIVER={{ODBC Driver 17 for SQL Server}};"
+            f"SERVER={SERVER};"
+            f"DATABASE={DATABASE};"
+            f"UID={USERNAME};"
+            f"PWD={PASSWORD};"
+            "TrustServerCertificate=yes;"
+        )
+    else:
+        conn = pyodbc.connect(
+            f"DRIVER={{ODBC Driver 17 for SQL Server}};"
+            f"SERVER={SERVER};"
+            f"DATABASE={DATABASE};"
+            "Trusted_Connection=yes;"
+            "TrustServerCertificate=yes;"
+        )
 
-    print("✅ Connected to SQL Server")
+    print("Connected to SQL Server")
 
     return conn
 
