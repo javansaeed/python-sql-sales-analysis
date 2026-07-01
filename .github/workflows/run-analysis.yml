@@ -1,4 +1,4 @@
-name: SQL Sales Analytics Pipeline
+name: SQL Sales Analytics
 
 on:
   push:
@@ -6,7 +6,16 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
+
+    services:
+      sqlserver:
+        image: mcr.microsoft.com/mssql/server:2019-latest
+        env:
+          ACCEPT_EULA: "Y"
+          SA_PASSWORD: "YourStrong!Passw0rd"
+        ports:
+          - 1433:1433
 
     steps:
     - name: Checkout repo
@@ -20,7 +29,3 @@ jobs:
     - name: Install dependencies
       run: |
         pip install -r requirements.txt
-
-    - name: Run project
-      run: |
-        python src/main.py
