@@ -52,4 +52,4 @@ jobs:
         -U sa \
         -P "YourStrong!Passw0rd" \
         -C \
-        -Q "RESTORE FILELISTONLY FROM DISK = '/github/workspace/data/TSQLV4.bak'"
+        -Q "RESTORE FILELISTONLY FROM DISK = 'python-sql-sales-analysis/data/TSQLV4.bak'"
